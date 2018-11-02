@@ -1,0 +1,69 @@
+{#include <iostream>
+#include <fstream>
+using namespace std;
+
+class student{
+    public:
+        string student_id;
+        string name;
+        int age;
+        string gender;
+        int score;
+        string grade;
+};
+
+int main(){
+cout << "Record Holder" <<endl;
+
+student holder[5];
+int male=0;
+int female=0;
+int agesum=0;
+float scoresum=0;
+
+for (int i=0;i<5;i++){
+    cout << "Enter ID : ";
+    cin >> holder[i].student_id;
+    cout << "Enter Name : ";
+    cin >> holder[i].name;
+    cout << "Enter Age : ";
+    cin >> holder[i].age;
+    cout << "Enter Gender 'm/f' : ";
+    cin >> holder[i].gender;
+    cout << "Enter Score 100% : ";
+    cin >> holder[i].score;
+    cout << "Enter Grade : ";
+    cin >> holder[i].grade;
+
+    agesum += holder[i].age;scoresum += holder[i].score;
+     if (holder[i].gender == "f"){
+        female++;
+     }
+     else{
+        male++;
+     }
+}
+
+
+//###writing records to Document###
+ofstream rec;
+rec.open("record.txt");
+
+rec << "ID          Student_Name          Age     Gender   Score   Grade \n";
+rec << "*****************************************************************\n";
+
+for (int i=0;i<5;i++){
+    rec << holder[i].student_id<< "\t" << holder[i].name << "\t" << holder[i].age << "\t" << holder[i].gender << "\t" << holder[i].score<< "\t" << holder[i].grade <<endl;
+};
+
+rec << "\n\n\n***********************************************************\n\n";
+rec << "The average score is  : " << scoresum/5 <<endl;
+rec << "The average age is    : " << agesum/5 <<endl;
+rec << "The number of females are  : " << female <<endl;
+rec << "The number of males are : "<< male <<endl;
+
+rec.close();
+
+return 0;
+
+};
